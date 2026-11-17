@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101a31"><title>我的刷卡助理</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Segoe UI',sans-serif;color:#17213a;background:#f3f5fa}*{box-sizing:border-box}body{margin:0}.app{max-width:570px;margin:auto;min-height:100dvh;padding:26px 16px 60px}header{color:#fff;background:linear-gradient(135deg,#0c1a36,#264e8a);border-radius:22px;padding:23px 21px 20px;box-shadow:0 13px 28px #162e562a}header small{color:#c2d1f1;font-size:12px;letter-spacing:1px}h1{font-size:25px;letter-spacing:-.5px;margin:6px 0}header p{margin:0;font-size:13px;color:#d9e6ff;line-height:1.7}.pane{background:#fff;border-radius:18px;margin-top:15px;padding:18px;box-shadow:0 4px 17px #17213a0a}.label{font-size:13px;font-weight:700;color:#53607b;display:block;margin-bottom:9px}input{width:100%;border:1.5px solid #e1e6f0;border-radius:13px;padding:14px;font-size:17px;background:white;outline:none}input:focus{border-color:#597bca}.chips{display:flex;gap:8px;overflow:auto;padding:2px 0 7px}.chip{font-size:13px;background:#eef2f8;border:0;border-radius:99px;padding:9px 13px;white-space:nowrap;color:#293d67;cursor:pointer}.chip.active{background:#213f79;color:white}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result{border:1px solid #dfecdf;background:#f5fbf7;border-radius:15px;padding:17px;margin-top:14px}.eyebrow{color:#557167;font-size:12px;font-weight:700}.result h2{font-size:23px;line-height:1.4;margin:8px 0}.rate{font-size:30px;font-weight:800;color:#177246}.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}.note{font-size:13px;color:#5e6a7d;line-height:1.7}.warn{color:#9b511a;background:#fff7e9;border-radius:10px;padding:10px;margin-top:10px;font-size:12px;line-height:1.6}.table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}.table td{padding:10px 4px;border-bottom:1px solid #eef0f5;vertical-align:top}.table td:last-child{text-align:right;font-weight:700}.btn{display:inline-block;text-decoration:none;border:0;background:#243f79;color:#fff;padding:12px 14px;border-radius:12px;font-size:13px;font-weight:650;cursor:pointer}.btn.outline{background:#eef2fb;color:#284578}.btnrow{display:flex;gap:7px;flex-wrap:wrap}.mini{font-size:11px;color:#7c879b}.section-title{font-weight:750;font-size:16px;margin:0 0 12px}.source{display:block;color:#355dab;text-decoration:none;font-size:13px;line-height:2}.toggle{display:flex;align-items:center;gap:9px;font-size:13px;color:#374967}.toggle input{width:auto}footer{margin-top:24px;text-align:center;color:#8490a3;font-size:11px}.hidden{display:none}.empty{border:1px dashed #bdc6d6;padding:14px;border-radius:12px;font-size:13px;line-height:1.7;color:#516079}.pill{display:inline-block;background:#e5effe;padding:4px 8px;border-radius:99px;color:#385899;font-size:11px;margin-left:4px}@media(max-width:360px){.app{padding-left:10px;padding-right:10px}.result h2{font-size:21px}}
+</style></head><body><main class="app"><header><small>PERSONAL CARD GUIDE · V1</small><h1>今天刷哪張？</h1><p>你的 4 種支付工具 · 台新 Richart 已設定自動扣繳<br>輸入店名，直接比較卡片與支付方式</p></header>
+<section class="pane"><label class="label" for="merchant">消費店家 / 平台</label><input id="merchant" list="suggestions" placeholder="例如：全家、UNIQLO、蝦皮" autocomplete="off"><datalist id="suggestions"></datalist><div class="chips" id="quick"></div><div style="margin-top:14px" class="two"><div><label class="label" for="amount">消費金額（選填）</label><input id="amount" inputmode="numeric" type="number" min="0" placeholder="例如 350"></div><div><label class="label" for="category">查詢類型</label><select id="category" style="width:100%;border:1.5px solid #e1e6f0;border-radius:13px;padding:14px 6px;background:white;font-size:15px;height:53px"><option value="auto">依店名辨識</option><option value="restaurant">一般餐廳</option><option value="general">一般消費</option><option value="overseas">海外實體消費</option></select></div></div>
+<div id="out" aria-live="polite"><div class="empty" style="margin-top:16px">先選一間店。已收錄的店家會立即出現推薦，並顯示其他刷法供比較。</div></div></section>
+<section class="pane"><h3 class="section-title">你目前的卡片</h3><div class="note">✓ 台新 Richart（LEVEL 2 以資格已生效為前提）<br>✓ 國泰 CUBE（固定回饋）<br>✓ 國泰現金回饋御璽卡<br>✓ 中信 LINE Pay 簽帳金融卡（LINE Pay）</div><div class="warn">目前使用 2026/11 的已收錄公告，並非即時確認。Richart 自動扣繳設定須已過銀行規定的生效時點；若尚未生效，台新加碼回饋不可直接套用。活動登錄、券、回饋上限及特殊店家請以當期官方規則為準。</div></section>
+<section class="pane"><h3 class="section-title">官方規則來源</h3><a class="source" href="https://mkp.taishinbank.com.tw/TsCms/marketing/expose/WM_20261006120222414/index.html" target="_blank" rel="noopener">台新 Richart 方案及指定商家 ↗</a><a class="source" href="https://www.cathaybk.com.tw/cathaybk/promo/event/credit-card/product/CUBE_rights/index.html?Type=11" target="_blank" rel="noopener">國泰 CUBE 固定回饋 ↗</a><a class="source" href="https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/notice.html" target="_blank" rel="noopener">中信 LINE Pay 簽帳金融卡 ↗</a><a class="source" href="https://www.cathaybk.com.tw/cathaybk/-/media/fddd4d9d98754438a663ee9129eb345a.pdf?sc_lang=en" target="_blank" rel="noopener">國泰現金回饋御璽卡權益手冊 ↗</a><p class="mini">規則人工核對版本：2026-11-17。目前尚未自動更新回饋規則，優惠到期或銀行變動時可能不適用；請以官方最新公告為準。</p></section><footer>僅比較已核對的基礎回饋 · 不需登入、不卡號、不追蹤交易</footer></main>
+<script>
+const entries=[
+{names:['全家','familymart'],plan:'天天刷',rate:3.3,pay:'台新 Pay',overrides:[['Pay著刷',3.8,'台新 Pay']],note:'台新官方列明全家：天天刷限台新 Pay；若能用台新 Pay，Pay著刷 3.8% 較高。'},
+{names:['7-11','711','統一超商','seven eleven'],plan:'天天刷',rate:3.3,pay:'台新 Pay',overrides:[['Pay著刷',3.8,'台新 Pay']],note:'超商的天天刷限台新 Pay；台新 Pay 的 Pay著刷 3.8% 更高。'},
+{names:['康是美'],plan:'天天刷',rate:3.3,pay:'Apple Pay／實體卡',overrides:[['Pay著刷',3.8,'台新 Pay']],note:'康是美亦列於台新 Pay 指定通路；需該門市可使用台新 Pay。'},
+{names:['ikea','宜家'],plan:'大筆刷',rate:3.3,pay:'Apple Pay／實體卡',overrides:[['Pay著刷',3.8,'台新 Pay']],note:'IKEA 亦為台新 Pay 指定通路；使用前確認可付款。'},
+{names:['net'],plan:'大筆刷',rate:3.3,pay:'Apple Pay／實體卡',overrides:[['Pay著刷',3.8,'台新 Pay']],note:'NET 在台新 Pay 官方例示通路中；不同門市應先確認支付支援。'},
+{names:['全聯','大全聯'],plan:null,rate:0,pay:null,note:'本版尚未核實當期全聯／大全聯適用支付與指定回饋，請查最新活動。',unknown:true},
+{names:['蝦皮','shopee'],plan:'數趣刷',rate:3.3,pay:'信用卡直接付款',extra:'Chill刷 3.3% 亦列有蝦皮，需留意實際條件與方案是否同日一致。'},
+{names:['淘寶','taobao'],plan:'數趣刷',rate:3.3,pay:'信用卡直接付款',extra:'Chill刷 3.3% 亦列有淘寶；海外認列、手續費須另看。'},
+{names:['酷澎','coupang'],plan:'數趣刷',rate:3.3,pay:'信用卡直接付款'},
+{names:['momo','富邦momo'],plan:'數趣刷',rate:3.3,pay:'信用卡直接付款'},
+{names:['pchome'],plan:'數趣刷',rate:3.3,pay:'信用卡直接付款'},
+{names:['amazon'],plan:'數趣刷',rate:3.3,pay:'信用卡直接付款'},
+{names:['博客來'],plan:'數趣刷',rate:3.3,pay:'信用卡直接付款'},
+{names:['uniqlo','優衣庫','gu','zara'],plan:'大筆刷',rate:3.3,pay:'Apple Pay／實體卡'},
+{names:['寶雅','屈臣氏','杏一','大樹藥局'],plan:'天天刷',rate:3.3,pay:'Apple Pay／實體卡'},
+{names:['新光三越'],plan:'大筆刷',rate:3.3,pay:'Apple Pay／實體卡',overrides:[['Pay著刷',3.8,'台新 Pay']],note:'新光三越同時列為台新 Pay 例示通路；留意櫃位和付款方式限制。'},
+{names:['sogo','遠東百貨','微風','台北101','京站','lalaport','華泰名品城'],plan:'大筆刷',rate:3.3,pay:'Apple Pay／實體卡'},
+{names:['uber eats','ubereats','foodpanda'],plan:'好饗刷',rate:3.3,pay:'信用卡直接付款',extra:'Chill刷列有 Uber Eats 3.3%；需注意平台及付款條件。'},
+{names:['uber','yoxi','台灣大車隊','高鐵','臺鐵','台鐵'],plan:'天天刷',rate:3.3,pay:'Apple Pay／實體卡或指定線上刷卡'},
+{names:['klook','kkday','agoda','booking','trip.com','airbnb'],plan:'玩旅刷',rate:3.3,pay:'信用卡直接付款'},
+{names:['長榮航空','星宇航空','中華航空','虎航','國泰航空'],plan:'玩旅刷',rate:3.3,pay:'信用卡直接付款'},
+{names:['chatgpt','notion','canva','perplexity','claude','steam','netflix','disney+'],plan:'數趣刷',rate:3.3,pay:'信用卡直接付款'},
+];
+const quick=['全家','康是美','蝦皮','UNIQLO','一般餐廳','7-11','NET','Netflix'];
+const normalize=x=>(x||'').trim().toLowerCase().replace(/[\s．·。]/g,'');
+const money=n=>Math.floor(n*100)/100;
+const params=new URLSearchParams(location.search);const merchant=document.getElementById('merchant'), amount=document.getElementById('amount'),category=document.getElementById('category'),out=document.getElementById('out');
+const datalist=document.getElementById('suggestions');entries.flatMap(e=>e.names).concat(['一般餐廳','一般消費','海外實體消費']).forEach(x=>{const el=document.createElement('option');el.value=x;datalist.appendChild(el)});
+quick.forEach(name=>{const b=document.createElement('button');b.className='chip';b.textContent=name;b.onclick=()=>{merchant.value=name;category.value=name==='一般餐廳'?'restaurant':'auto';render()};document.getElementById('quick').appendChild(b)});
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function row(label,rate,pay='',note=''){return {label,rate,pay,note}}
+function render(){const name=merchant.value.trim(),key=normalize(name),amt=Number(amount.value)||0; if(!name&&category.value==='auto'){out.innerHTML='<div class="empty" style="margin-top:16px">輸入店名，或點上方常用店家。</div>';return}
+let e=entries.find(e=>e.names.some(n=>normalize(n)===key)) || entries.find(e=>e.names.some(n=>normalize(n).length>3&&key.includes(normalize(n))));
+let isRestaurant=category.value==='restaurant'||(category.value==='auto'&&['一般餐廳','餐廳','吃飯','餐飲'].includes(name));
+let general=category.value==='general'||['一般消費','台新 Pay'].includes(name);
+let overseas=category.value==='overseas'||name==='海外實體消費';
+const unknown=!e&&!isRestaurant&&!general&&!overseas;
+let rows=[];let caveats=[];
+if(e&&!e.unknown){rows.push(row('台新 Richart · '+e.plan,e.rate,e.pay));(e.overrides||[]).forEach(r=>rows.push(row('台新 Richart · '+r[0],r[1],r[2])));if(e.extra)caveats.push(e.extra);if(e.note)caveats.push(e.note)}
+if(isRestaurant)rows.push(row('台新 Richart · 好饗刷',3.3,'Apple Pay／實體卡','僅適用符合餐飲認列的交易，餐券及特殊通路可能排除'));
+if(general)rows.push(row('台新 Richart · 一般消費',0.3,'Apple Pay／實體卡'));
+if(overseas)rows.push(row('台新 Richart · 玩旅刷',3.3,'Apple Pay／實體卡','不含海外交易手續費；各通路認列依銀行規則'));
+if(e||isRestaurant||general||overseas){rows.push(row('國泰 CUBE · 固定回饋',overseas?2.5:1.2,'Apple Pay／實體卡','國內一般消費或海外實體消費；保費、特定排除交易不適用'));rows.push(row('中信 LINE Pay 簽帳金融卡',1,'LINE Pay／實體簽帳金融卡','一般消費認列，特殊通路除外'));}
+// 國泰現金御璽卡有特殊排除；保守列出僅供一般交易比較。
+if(e||isRestaurant||general||overseas)rows.push(row('國泰現金回饋御璽卡',overseas?2:0.5,'Apple Pay／實體卡','一般消費，便利商店及特定通路除外'));
+if(['全家','familymart','7-11','711','統一超商','seveneleven'].includes(key)){rows=rows.filter(r=>!['國泰現金回饋御璽卡','國泰 CUBE · 固定回饋'].includes(r.label));caveats.push('國泰現金回饋御璽卡排除便利超商；CUBE 固定回饋也不把此處視為可直接認列的一般消費，故不列入比較。')}
+if(unknown||e?.unknown){const q=encodeURIComponent(name+' 信用卡 回饋 2026 台新 Richart LINE Pay');out.innerHTML=`<div class="empty" style="margin-top:16px"><b>「${escapeHTML(name)}」尚未收錄可靠的回饋資料</b><p>不會直接套用某個高回饋率。請先查當期官方及卡友分享；查到後可以再加入資料庫。</p><div class="btnrow"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/search?q=${q}">查最新網路優惠 ↗</a><a class="btn outline" target="_blank" rel="noopener" href="https://mkp.taishinbank.com.tw/TsCms/marketing/expose/WM_20261006120222414/index.html">台新官方商家查詢 ↗</a></div></div>`;return}
+rows.sort((a,b)=>b.rate-a.rate);const best=rows[0];const calc=amt>0?`<span class="mini">預估 ${Math.floor(amt*best.rate/100)} 點／元（僅示意，銀行有逐筆取整規則）</span>`:'';
+const rowHtml=rows.map((r,i)=>`<tr><td><b>${escapeHTML(r.label)}</b>${i===0?'<span class="pill">最高</span>':''}<div class="mini">${escapeHTML(r.pay)}</div></td><td>${r.rate.toFixed(1)}%</td></tr>`).join('');
+const caution=(overseas?'海外消費可能有約 1.5% 手續費，實際淨回饋需另算。 ':'')+'此排行只比較已核實的基本方案，不包含需登錄／領券／消費門檻的限時加碼，也未計入今日 Richart 已刷消費與同日只能用一個方案的限制。';
+out.innerHTML=`<div class="result"><div class="eyebrow">已收錄方案中，基礎回饋最高</div><h2>${escapeHTML(best.label)}</h2><div class="meta"><div><div class="rate">${best.rate.toFixed(1)}%</div>${calc}</div><div style="font-size:13px;text-align:right;max-width:48%">${escapeHTML(best.pay)}</div></div>${best.note?`<p class="note">${escapeHTML(best.note)}</p>`:''}</div><table class="table"><tbody>${rowHtml}</tbody></table>${caveats.length?`<div class="warn">${caveats.map(escapeHTML).join('<br>')}</div>`:''}<div class="warn">${escapeHTML(caution)}</div>`;
+}
+merchant.addEventListener('input',render);amount.addEventListener('input',render);category.addEventListener('change',render);if(params.get('shop')){merchant.value=params.get('shop')}render();
+</script></body></html>
